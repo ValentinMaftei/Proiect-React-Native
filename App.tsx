@@ -1,20 +1,20 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
+import Navigation from './navigation';
+import RefreshContext from './components/RefreshContext';
+import React, {useState} from 'react';
+
 
 export default function App() {
+  const [refresh, setRefresh] = useState(false);
+
+  const toggleRefresh = () => {
+    setRefresh(!refresh);
+  };
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <RefreshContext.Provider value={{ refresh: false, toggleRefresh }}>
+      <Navigation />
+    </RefreshContext.Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
